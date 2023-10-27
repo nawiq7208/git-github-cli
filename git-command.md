@@ -188,3 +188,118 @@ Here's how you can use a partial commit hash in Git commands:
 - However, it's important to note that if multiple commits have the same starting characters in their hash, Git might not be able to uniquely identify the commit, and you might encounter an error. To avoid ambiguity, it's a good practice to use enough characters of the hash to make it unique within the context of your repository.
 
 - Using a partial commit hash can be especially useful when you want to refer to a specific commit without needing to type or copy the entire hash. Just ensure that the partial hash you provide is unique enough to identify the intended commit accurately.
+
+21. How to handle conflict when merge your code on branch
+
+    A. Update Your Local Branch :
+
+      Before merging your code, make sure your local branch is up to date with the latest changes from the target branch. You can do this by running:
+
+        git checkout your-feature-branch
+
+        git pull origin target-branch
+
+    B. Start the Merge:
+      
+      Use the git merge or git pull command to merge the target branch into your feature branch. For example:
+
+      git checkout your-feature-branch
+
+      git merge target-branch
+
+    C. Resolve Conflicts:
+
+      If there are conflicts, Git will notify you and mark the conflicting areas in your code. You will need to open these files in your code editor and manually resolve the conflicts. Conflicts usually look something like this in your code:
+
+        <<<<<<< HEAD
+        // Your code
+        =======
+        // Code from the target branch
+        >>>>>>>
+    
+    D. Test Your Changes:
+
+      After resolving conflicts, test your code thoroughly to ensure that the changes you made, along with the resolved conflicts, work as expected.
+
+    E. Add and Commit:
+
+      Once the conflicts are resolved and you've tested your code, add the modified files and commit the changes:
+
+        git add <conflicted-files>
+        git commit -m "Merged changes from target-branch and resolved conflicts"
+
+    F. Complete the Merge:
+
+      Finish the merge by running:
+
+        git merge --continue
+
+    G. Push Your Changes:
+
+      Finally, push your local changes to the remote repository:
+
+        git push origin your-feature-branch
+
+    H. Create a Pull Request (Optional):
+      If you're using a pull request-based workflow (e.g., GitHub, GitLab), create a pull request from your feature branch to the target branch. This allows others to review your changes before merging them into the target branch.
+
+      Remember that conflicts can sometimes be complex, and you may need to collaborate with team members to resolve them. Good communication and collaboration are key when dealing with conflicts in a team setting.
+
+      Additionally, consider using a merge or rebase strategy that best fits your team's workflow. Merge and rebase have their own pros and cons, and the choice depends on your specific use case and preferences.
+
+22. Step by step process how to Pull Request, Review, Approve and Merge
+
+    Certainly, here's a step-by-step process for creating a Pull Request, reviewing, approving, and merging code in a typical Git-based workflow, using a platform like GitHub or GitLab:
+
+    Step 1: Create a Pull Request
+
+    1. Fork the Repository (if you don't have write access): If you don't have direct write access to the repository, fork it on the platform (e.g., GitHub). This creates your personal copy of the repository.
+
+    2. Clone the Repository (Your Fork): Clone your forked repository to your local machine:
+
+            git clone https://github.com/your-username/your-fork.git
+    
+    3. Create a New Branch: Create a new branch in your local repository where you'll make your changes.
+
+            git checkout -b feature-branch
+
+    4. Make Code Changes: Make your code changes on this feature branch.
+
+    5. Commit and Push: Commit your changes and push them to your fork:
+
+            git add .
+            git commit -m "Description of changes"
+            git push origin feature-branch
+    
+    6. Create a Pull Request: On the platform (e.g., GitHub), navigate to the original repository, switch to your feature branch, and click on the "New Pull Request" button. Follow the prompts to create the Pull Request.
+
+    Step 2: Review the Pull Request
+
+    Request Reviewers: Assign one or more team members as reviewers for your Pull Request. They will be notified to review your changes.
+
+    Reviewers Review Code: Reviewers will examine your code changes, leave comments, and provide feedback through the platform's interface.
+
+    Make Changes (if necessary): If reviewers request changes or make suggestions, make the necessary code adjustments, commit those changes, and push them to your branch.
+
+    Step 3: Approve the Pull Request
+
+    Reviewers Approve: Once reviewers are satisfied with your code, they can approve the Pull Request on the platform.
+
+    Address Merge Conflicts (if any): If there are merge conflicts with the target branch, resolve them as described in the previous response. This is typically done in your local branch, then push the resolved changes to the Pull Request.
+
+    Step 4: Merge the Pull Request
+
+    Maintainer (Repo Owner or Admin) Merges: The maintainer of the repository (usually a project owner or an admin) will merge the Pull Request into the main branch.
+
+    Pull Request is Closed: Once the Pull Request is merged, it is typically closed, and the changes are now part of the main branch.
+
+    Cleanup: After merging, you can delete the feature branch both locally and on your fork (if applicable).
+
+        # Locally
+        git checkout main
+        git branch -d feature-branch
+
+        # On your fork
+        git push origin --delete feature-branch
+
+    Keep in mind that the exact process can vary depending on the platform you're using and the specific workflow of your team or project. This general process is commonly used in many open-source and collaborative development environments.
